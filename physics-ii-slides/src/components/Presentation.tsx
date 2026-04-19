@@ -195,8 +195,7 @@ export const Presentation = ({ children }: PresentationProps) => {
 
       {/* Logo/Identity - Hidden on small mobile */}
       <div className="hidden sm:flex absolute bottom-6 left-8 items-center gap-2 opacity-50 z-50">
-        <Zap className="w-4 h-4 text-physics-accent" />
-        <span className="text-[10px] font-mono tracking-widest uppercase">DIU | PHY 102 | Quantum Theory</span>
+        
       </div>
     </div>
   );
