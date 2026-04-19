@@ -13,6 +13,16 @@ export const Presentation = ({ children }: PresentationProps) => {
   const [scale, setScale] = useState(1);
   const [isPortrait, setIsPortrait] = useState(false);
   const totalSlides = React.Children.count(children);
+  const PRESENTERS = [
+    { start: 0, end: 3, name: "Naim Hossain", id: "252-15-178" },
+    { start: 4, end: 5, name: "Md Ajmine Adil Sadik", id: "252-15-172" },
+    { start: 6, end: 7, name: "Jannat Ferdous Asha", id: "252-15-179" },
+    { start: 8, end: 8, name: "Diya Bipasha", id: "252-15-652" },
+    { start: 9, end: 10, name: "Tasneem Binte Aziz", id: "252-15-070" },
+  ];
+
+  const currentPresenter = PRESENTERS.find(p => currentSlide >= p.start && currentSlide <= p.end);
+  const isIntroSlide = currentPresenter?.start === currentSlide;
 
   const updateScale = useCallback(() => {
     const width = window.innerWidth;
@@ -111,6 +121,26 @@ export const Presentation = ({ children }: PresentationProps) => {
           transition={{ duration: 0.3 }}
         />
       </div>
+
+      {/* Presenter Name - Top Right corner for the 1st slide of each presenter */}
+      <AnimatePresence>
+        {isIntroSlide && currentPresenter && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, x: 20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: -20, x: 20 }}
+            className="absolute top-6 right-8 z-[60] flex flex-col items-end pointer-events-none"
+          >
+            <div className="flex items-center gap-3 bg-physics-surface/90 backdrop-blur-md border border-physics-accent px-6 py-3 rounded-2xl shadow-[0_0_30px_rgba(0,212,255,0.2)]">
+              <div className="w-2 h-2 rounded-full bg-physics-accent animate-pulse" />
+              <div className="flex flex-col">
+                <span className="text-[10px] font-mono text-physics-accent uppercase tracking-widest leading-none mb-1">Now Presenting</span>
+                <span className="text-sm font-black text-physics-text uppercase tracking-tight">{currentPresenter.name}</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Slide Container with Dual Scaling */}
       <div 

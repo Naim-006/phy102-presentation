@@ -41,7 +41,7 @@ const WavePacket = ({ color, className, frequency = 0.2 }: { color: string, clas
       animate={{
         d: [
           "M 0 20 Q 5 5, 10 20 T 20 20 T 30 20 T 40 20 T 50 20 T 60 20",
-          "M 0 20 Q 5 35, 10 20 T 20 20 T 30 20 T 40 20 T 50 20 T 60 20",
+          "M 0 20 Q 5 45, 10 20 T 20 20 T 30 20 T 40 20 T 50 20 T 60 20",
           "M 0 20 Q 5 5, 10 20 T 20 20 T 30 20 T 40 20 T 50 20 T 60 20"
         ]
       }}
@@ -134,7 +134,7 @@ export const Slide1_Title = () => (
         </motion.div>
         <div className="h-16 w-1 bg-physics-accent" />
         <div className="text-left">
-          <div className="text-sm font-mono tracking-[0.3em] text-physics-accent uppercase">Quantum Theory</div>
+          <div className="text-sm font-mono tracking-[0.3em] text-physics-accent uppercase">PHY 102</div>
           <div className="text-xl font-bold tracking-widest text-physics-text uppercase">Physics II</div>
         </div>
       </div>
@@ -156,12 +156,12 @@ export const Slide1_Title = () => (
         </div>
         <div>
           <h3 className="text-physics-accent text-[10px] font-mono uppercase tracking-[0.3em] mb-4">Team Members</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-physics-text-dim">
-            <span>• Member 1</span>
-            <span>• Member 2</span>
-            <span>• Member 3</span>
-            <span>• Member 4</span>
-            <span>• Member 5</span>
+          <div className="flex flex-col gap-1 text-[10px] text-physics-text-dim">
+            <p><span className="text-physics-accent font-bold">Naim Hossain</span> | 252-15-178</p>
+            <p><span className="text-physics-accent font-bold">Md Ajmine Adil Sadik</span> | 252-15-172</p>
+            <p><span className="text-physics-accent font-bold">Jannatul Ferdous Asha</span> | 252-15-179</p>
+            <p><span className="text-physics-accent font-bold">Diya Bipasha</span> | 252-15-652</p>
+            <p><span className="text-physics-accent font-bold">Tasneem Binte Aziz</span> | 252-15-070</p>
           </div>
         </div>
       </div>
@@ -321,7 +321,7 @@ export const Slide4_Threshold = () => {
   const [isHighEnergy, setIsHighEnergy] = useState(true);
 
   return (
-    <SlideLayout title="The Energy Barriers" subtitle="Frequency & Work Function">
+    <SlideLayout title="Energy Barriers" subtitle="Frequency & Work Function">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 h-full items-center">
         <div className="space-y-4 md:space-y-8">
           <section className="bg-physics-surface p-8 rounded-2xl border border-physics-border shadow-physics">
@@ -635,7 +635,7 @@ export const Slide8_Assumptions = () => (
 
 export const Slide9_Derivation = () => {
   return (
-    <SlideLayout title="noCompton Formula" subtitle="Calculating the Change">
+    <SlideLayout title="Compton Formula" subtitle="Calculating the Change">
       <div className="flex h-full items-center justify-center">
         <div className="max-w-3xl w-full">
           <div className="bg-physics-accent/10 p-6 md:p-12 border-2 border-physics-accent/40 rounded-[40px] md:rounded-[60px] text-center shadow-[0_0_50px_rgba(0,212,255,0.1)]">
@@ -664,11 +664,12 @@ export const Slide9_Derivation = () => {
 
 export const Slide10_Comparison = () => {
   const tableData = [
-    { feature: "Main Idea", compton: "Light bounces off (Elastic Model)", pe: "Light is absorbed & pulls e-" },
-    { feature: "Daily Reality", compton: "Radiation Therapy (Killing Cancer)", pe: "The sensor in your Digital Camera" },
-    { feature: "Industrial Use", compton: "Non-destructive metal testing", pe: "Night-vision goggles & Remotes" },
-    { feature: "Scientific Proof", compton: "Light has MOMENTUM (Push)", pe: "Light has DISCRETE ENERGY (e=hν)" },
-    { feature: "Particle Role", compton: "Photons as elastic balls", pe: "Photons as energy packets" },
+    { feature: "Core Idea", compton: "Light collides with electrons and bounces with reduced energy", pe: "Light is absorbed and releases electrons from surface" },
+    { feature: "What we see", compton: "X-ray/γ-ray photon deflects after hitting matter", pe: "Light knocks out electrons from a material" },
+    { feature: "Scientific Proof", compton: "Light carries momentum (push effect)", pe: "Light carries quantized energy (E = hν)" },
+    { feature: "Real-life Case", compton: "Cancer radiation therapy (X-rays scattering in tissue)", pe: "Digital camera sensor converting light into image" },
+    { feature: "Industrial Use", compton: "Material inspection & radiation-based imaging", pe: "Solar cells, automatic doors, light sensors" },
+    { feature: "Particle View", compton: "Photon behaves like a billiard ball collision", pe: "Photon behaves like an energy packet (quantum)" },
   ];
 
   return (
@@ -676,10 +677,10 @@ export const Slide10_Comparison = () => {
       <div className="mt-8 overflow-hidden rounded-[40px] border border-white/5 shadow-2xl">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-physics-accent text-black font-black uppercase text-xs tracking-widest italic">
-              <th className="p-8">Feature</th>
-              <th className="p-8">Compton (Scattering)</th>
-              <th className="p-8">Photoelectric (Emission)</th>
+            <tr className="bg-physics-accent text-black font-black uppercase text-[10px] md:text-xs tracking-widest italic">
+              <th className="p-4 md:p-8">Feature</th>
+              <th className="p-4 md:p-8">Compton (Scattering)</th>
+              <th className="p-4 md:p-8">Photoelectric (Emission)</th>
             </tr>
           </thead>
           <tbody className="bg-gray-900/40">
@@ -691,9 +692,9 @@ export const Slide10_Comparison = () => {
                 transition={{ delay: i * 0.1 }}
                 className="border-b border-physics-border hover:bg-physics-accent-dim transition-colors"
               >
-                <td className="p-8 font-bold text-physics-accent uppercase text-[10px] tracking-wider">{row.feature}</td>
-                <td className="p-8 text-gray-300 font-light">{row.compton}</td>
-                <td className="p-8 text-gray-300 font-light">{row.pe}</td>
+                <td className="p-4 md:p-8 font-bold text-physics-accent uppercase text-[8px] md:text-[10px] tracking-wider">{row.feature}</td>
+                <td className="p-4 md:p-8 text-gray-300 font-light text-xs md:text-base leading-relaxed">{row.compton}</td>
+                <td className="p-4 md:p-8 text-gray-300 font-light text-xs md:text-base leading-relaxed">{row.pe}</td>
               </motion.tr>
             ))}
           </tbody>
@@ -874,11 +875,11 @@ export const Slide13_ThankYou = () => (
         <div className="text-center md:text-left">
           <h4 className="text-[10px] md:text-xs font-mono uppercase text-physics-accent tracking-widest mb-2 md:mb-4">Team Members</h4>
           <div className="space-y-1 text-xs md:text-sm text-physics-text-dim font-mono">
-            <p>• Alpha One</p>
-            <p>• Beta Two</p>
-            <p>• Gamma Three</p>
-            <p>• Delta Four</p>
-            <p>• Epsilon Five</p>
+            <p>• Naim Hossain (252-15-178)</p>
+            <p>• Md Ajmine Adil Sadik (252-15-172)</p>
+            <p>• Jannatul Ferdous Asha (252-15-179)</p>
+            <p>• Diya Bipasha (252-15-652)</p>
+            <p>• Tasneem Binte Aziz (252-15-070)</p>
           </div>
         </div>
         <div className="text-center md:text-left">
