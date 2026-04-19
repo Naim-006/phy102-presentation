@@ -205,12 +205,12 @@ export const Slide2_TOC = () => (
 export const Slide3_PEIntro = () => {
   return (
     <SlideLayout title="The Basic Mechanism" subtitle="Light as a Particle (Photon)">
-      <div className="flex gap-12 items-center h-full">
-        <div className="flex-1 space-y-6">
-          <p className="text-3xl text-physics-text font-light leading-relaxed">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+        <div className="space-y-4 md:space-y-6">
+          <p className="text-2xl md:text-3xl text-physics-text font-light leading-relaxed">
             When <span className="text-physics-accent font-medium">light hits a metal</span>, it can knock electrons out.
           </p>
-          <p className="text-lg text-physics-text-dim">
+          <p className="text-base md:text-lg text-physics-text-dim">
             It acts like a stream of energy balls called <span className="text-physics-text font-bold">Photons</span>. One photon kicks one electron!
           </p>
           <div className="p-6 bg-physics-surface border border-physics-border rounded-[30px] shadow-physics">
@@ -232,7 +232,7 @@ export const Slide3_PEIntro = () => {
           </div>
         </div>
 
-        <div className="flex-1 rounded-[40px] border border-physics-border bg-black/80 dark:bg-black p-8 flex items-center justify-center relative overflow-hidden h-[450px]">
+        <div className="rounded-[40px] border border-physics-border bg-black/80 dark:bg-black p-4 md:p-8 flex items-center justify-center relative overflow-hidden h-[300px] md:h-[450px]">
           <div className="relative w-full h-full">
             <div className="absolute top-0 left-0 p-4 bg-physics-accent text-black text-[10px] font-bold uppercase rounded-br-2xl z-20">
               Interactive Simulation: Impact
@@ -322,8 +322,8 @@ export const Slide4_Threshold = () => {
 
   return (
     <SlideLayout title="The Energy Barriers" subtitle="Frequency & Work Function">
-      <div className="grid grid-cols-2 gap-12 h-full items-center">
-        <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 h-full items-center">
+        <div className="space-y-4 md:space-y-8">
           <section className="bg-physics-surface p-8 rounded-2xl border border-physics-border shadow-physics">
             <h3 className="text-2xl font-bold text-physics-text mb-2 italic">1. Threshold Frequency (<Latex formula="\nu_0" />)</h3>
             <p className="text-physics-text-dim leading-relaxed">
@@ -433,9 +433,9 @@ export const Slide5_EinsteinEquation = () => {
   ];
 
   return (
-    <SlideLayout title="Einstein’s Magic Formula" subtitle="Very Simple Energy Math">
-      <div className="mt-8 grid grid-cols-2 gap-12 items-center h-full">
-        <div className="space-y-4">
+    <SlideLayout title="Einstein’s Formula" subtitle="Very Simple Energy Math">
+      <div className="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+        <div className="space-y-2 md:space-y-4">
           {steps.map((s, i) => (
             <motion.div
               key={i}
@@ -464,7 +464,7 @@ export const Slide5_EinsteinEquation = () => {
 
 export const Slide6_Cell = () => (
   <SlideLayout title="Photoelectric Cell" subtitle="Application Archetypes">
-    <div className="grid grid-cols-3 gap-8 mt-12 h-[400px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-4 md:mt-12 h-full">
       {[
         { icon: Radio, title: "Photo-emission", desc: "Vacuum tube where light causes surface emission of electrons from cathode." },
         { icon: Network, title: "Photo-voltaic", desc: "Energy of photons creates potential difference across semi-conductor layers." },
@@ -478,7 +478,7 @@ export const Slide6_Cell = () => (
           className="relative group h-full"
         >
           <div className="absolute inset-0 bg-physics-accent opacity-0 group-hover:opacity-5 transition-opacity rounded-3xl" />
-          <div className="h-full border border-physics-border bg-physics-surface rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-physics">
+          <div className="h-full border border-physics-border bg-physics-surface rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-physics">
             <type.icon className="w-16 h-16 text-physics-accent mb-6" />
             <h3 className="text-2xl font-bold text-physics-text mb-4 uppercase italic tracking-tighter">{type.title}</h3>
             <p className="text-physics-text-dim leading-relaxed text-sm">
@@ -501,29 +501,29 @@ export const Slide6_Cell = () => (
 export const Slide7_ComptonIntro = () => {
   return (
     <SlideLayout title="What is the Compton Effect?" subtitle="Bouncing Light">
-      <div className="flex gap-12 items-center h-full">
-        <div className="flex-1 space-y-8">
-          <h3 className="text-3xl font-light text-physics-text leading-relaxed">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center h-full">
+        <div className="space-y-4 md:space-y-8">
+          <h3 className="text-2xl md:text-3xl font-light text-physics-text leading-relaxed">
             When light (X-rays) <span className="text-physics-accent">crashes into an electron</span>, its color (wavelength) changes.
           </h3>
-          <p className="text-lg text-physics-text-dim">
+          <p className="text-base md:text-lg text-physics-text-dim">
             This proves that light acts like a <span className="text-physics-text font-bold">Small Ball (Particle)</span> that can hit things and bounce off!
           </p>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-physics-surface p-6 rounded-2xl border border-physics-border shadow-physics">
-              <div className="text-xs text-physics-accent font-bold mb-1 uppercase tracking-widest">Wavelength Change</div>
-              <p className="text-physics-text text-xl">Gets <span className="text-red-400 font-black">LONGER</span></p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-physics-surface p-4 md:p-6 rounded-2xl border border-physics-border shadow-physics">
+              <div className="text-[10px] text-physics-accent font-bold mb-1 uppercase tracking-widest text-[8px] md:text-[10px]">Wavelength Change</div>
+              <p className="text-physics-text text-lg md:text-xl">Gets <span className="text-red-400 font-black">LONGER</span></p>
               <p className="text-[10px] text-physics-text-dim mt-2">Less Energy Left</p>
             </div>
-            <div className="bg-physics-surface p-6 rounded-2xl border border-physics-border shadow-physics">
-              <div className="text-xs text-physics-accent font-bold mb-1 uppercase tracking-widest">Frequency Change</div>
-              <p className="text-physics-text text-xl">Gets <span className="text-blue-400 font-black">LOWER</span></p>
+            <div className="bg-physics-surface p-4 md:p-6 rounded-2xl border border-physics-border shadow-physics">
+              <div className="text-[10px] text-physics-accent font-bold mb-1 uppercase tracking-widest text-[8px] md:text-[10px]">Frequency Change</div>
+              <p className="text-physics-text text-lg md:text-xl">Gets <span className="text-blue-400 font-black">LOWER</span></p>
               <p className="text-[10px] text-physics-text-dim mt-2">Energy transferred to electron</p>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 rounded-[40px] border border-physics-border bg-black/80 dark:bg-black flex flex-col p-12 relative overflow-hidden h-[450px]">
+        <div className="rounded-[40px] border border-physics-border bg-black/80 dark:bg-black flex flex-col p-6 md:p-12 relative overflow-hidden h-[350px] md:h-[450px] w-full max-w-xl">
           <div className="mb-4 text-center">
             <span className="text-[10px] font-mono uppercase bg-physics-accent text-black px-3 py-1 rounded-full font-bold">Collision Simulation</span>
           </div>
@@ -607,8 +607,8 @@ export const Slide7_ComptonIntro = () => {
 
 export const Slide8_Assumptions = () => (
   <SlideLayout title="Procedure" subtitle="Basic Assumptions">
-    <div className="grid grid-cols-2 gap-12 mt-8">
-      <div className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4 md:mt-8">
+      <div className="space-y-4 md:space-y-6">
         <h3 className="text-physics-accent font-bold uppercase text-xs tracking-[0.2em] mb-4">What we believe:</h3>
         <StaggeredList items={[
           "Collisions work like falling billard balls",
@@ -635,15 +635,15 @@ export const Slide8_Assumptions = () => (
 
 export const Slide9_Derivation = () => {
   return (
-    <SlideLayout title="Compton Formula" subtitle="Calculating the Change">
+    <SlideLayout title="noCompton Formula" subtitle="Calculating the Change">
       <div className="flex h-full items-center justify-center">
         <div className="max-w-3xl w-full">
-          <div className="bg-physics-accent/10 p-12 border-2 border-physics-accent/40 rounded-[60px] text-center shadow-[0_0_50px_rgba(0,212,255,0.1)]">
-            <p className="text-physics-text-dim font-mono text-sm uppercase mb-6 tracking-[0.5em]">The Change in Wavelength</p>
-            <div className="text-6xl py-8 bg-black/80 dark:bg-black rounded-3xl mb-8 border border-physics-border">
+          <div className="bg-physics-accent/10 p-6 md:p-12 border-2 border-physics-accent/40 rounded-[40px] md:rounded-[60px] text-center shadow-[0_0_50px_rgba(0,212,255,0.1)]">
+            <p className="text-physics-text-dim font-mono text-xs md:text-sm uppercase mb-4 md:mb-6 tracking-[0.3em] md:tracking-[0.5em]">The Change in Wavelength</p>
+            <div className="text-3xl md:text-6xl py-4 md:py-8 bg-black/80 dark:bg-black rounded-3xl mb-6 md:mb-8 border border-physics-border">
               <Latex formula="\Delta \lambda = \frac{h}{m_e c}(1 - \cos \phi)" block />
             </div>
-            <div className="grid grid-cols-2 gap-8 text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 text-left">
               <div className="p-6 bg-physics-surface rounded-2xl border border-physics-border shadow-physics">
                 <h5 className="text-physics-accent text-xs font-bold uppercase mb-2 tracking-widest">Constant Value</h5>
                 <p className="text-physics-text text-xl font-mono">0.00243 nm</p>
@@ -743,14 +743,14 @@ export const Slide11_AdvancedGraphs = () => {
 
   return (
     <SlideLayout title="Science Graphs" subtitle="Checking the Data">
-      <div className="flex h-full gap-8">
-        <div className="w-[200px] flex flex-col gap-4">
+      <div className="flex flex-col md:flex-row h-full gap-4 md:gap-8">
+        <div className="w-full md:w-[200px] flex md:flex-col gap-2 md:gap-4 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
           {graphConfig.map((g, i) => (
             <button
               key={i}
               onClick={() => setGraphType(i)}
               className={cn(
-                "p-6 rounded-2xl border transition-all text-left text-[10px] uppercase font-bold tracking-widest",
+                "p-3 md:p-6 rounded-xl md:rounded-2xl border transition-all text-left text-[8px] md:text-[10px] uppercase font-bold tracking-widest flex-shrink-0 md:flex-shrink",
                 graphType === i ? "bg-physics-accent border-physics-accent text-black" : "bg-physics-surface border-physics-border text-physics-text-dim"
               )}
             >
@@ -759,18 +759,18 @@ export const Slide11_AdvancedGraphs = () => {
           ))}
         </div>
 
-        <div className="flex-1 bg-physics-surface/50 rounded-[40px] border border-physics-border p-12 flex flex-col">
-          <div className="mb-8">
-            <h4 className="text-3xl font-bold text-physics-text mb-2 italic">{graphConfig[graphType].title}</h4>
-            <p className="text-physics-text-dim italic text-sm">{graphConfig[graphType].subtitle}</p>
+        <div className="flex-1 bg-physics-surface/50 rounded-[30px] md:rounded-[40px] border border-physics-border p-6 md:p-12 flex flex-col">
+          <div className="mb-4 md:mb-8 text-center md:text-left">
+            <h4 className="text-xl md:text-3xl font-bold text-physics-text mb-2 italic">{graphConfig[graphType].title}</h4>
+            <p className="text-physics-text-dim italic text-xs md:text-sm">{graphConfig[graphType].subtitle}</p>
           </div>
 
-          <div className="flex-1 min-h-0 bg-black/20 p-4 rounded-2xl">
+          <div className="flex-1 min-h-0 bg-black/20 p-2 md:p-4 rounded-2xl">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={graphConfig[graphType].data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#222" />
-                <XAxis dataKey={graphConfig[graphType].xAxis} stroke="#444" label={{ value: graphConfig[graphType].xAxisLabel, position: 'insideBottom', offset: -5, fill: '#666', fontSize: 10 }} />
-                <YAxis stroke="#444" />
+                <XAxis dataKey={graphConfig[graphType].xAxis} stroke="#444" label={{ value: graphConfig[graphType].xAxisLabel, position: 'insideBottom', offset: -5, fill: '#666', fontSize: 8 }} />
+                <YAxis stroke="#444" fontSize={8} />
                 <Tooltip contentStyle={{ backgroundColor: '#000', border: '1px solid #333' }} />
                 {graphConfig[graphType].keys.map((k, idx) => (
                   <Line key={k} type="monotone" dataKey={k} stroke={idx === 0 ? "#00d4ff" : "#ff00ff"} strokeWidth={3} dot={false} strokeDasharray={idx === 1 ? "5 5" : ""} />
@@ -795,29 +795,29 @@ export const Slide11_AdvancedGraphs = () => {
 
 export const Slide12_Problems = () => (
   <SlideLayout title="Solving Problems" subtitle="Simple Examples">
-    <div className="grid grid-cols-2 gap-8 mt-4 h-full">
-      <div className="space-y-6 flex flex-col">
-        <div className="flex-1 p-8 bg-physics-surface border border-physics-border rounded-3xl relative shadow-physics">
-          <div className="absolute top-4 right-6 text-[10px] font-mono text-physics-accent uppercase">Example 1</div>
-          <h4 className="text-physics-text font-bold mb-4">Find the Start Frequency (Threshold)</h4>
-          <div className="space-y-4 text-sm text-physics-text-dim">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-4 h-full">
+      <div className="space-y-4 md:space-y-6 flex flex-col">
+        <div className="flex-1 p-6 md:p-8 bg-physics-surface border border-physics-border rounded-2xl md:rounded-3xl relative shadow-physics">
+          <div className="absolute top-4 right-6 text-[8px] md:text-[10px] font-mono text-physics-accent uppercase">Example 1</div>
+          <h4 className="text-physics-text font-bold mb-2 md:mb-4 text-sm md:text-base">Find the Start Frequency (Threshold)</h4>
+          <div className="space-y-2 md:space-y-4 text-xs md:text-sm text-physics-text-dim">
             <p>Work Function (<Latex formula="\Phi" />) = 1.85 eV</p>
-            <div className="p-4 bg-physics-bg rounded-xl font-mono border border-physics-border">
+            <div className="p-3 md:p-4 bg-physics-bg rounded-xl font-mono border border-physics-border overflow-x-auto text-[10px] md:text-xs">
               <Latex formula="\nu_0 = \frac{\Phi}{h} = \frac{1.85 \text{ eV}}{h}" block />
             </div>
-            <div className="p-4 bg-physics-accent/10 rounded-xl text-physics-accent font-bold">
+            <div className="p-3 md:p-4 bg-physics-accent/10 rounded-xl text-physics-accent font-bold">
               Ans: <Latex formula="4.46 \times 10^{14} \text{ Hz}" />
             </div>
           </div>
         </div>
 
-        <div className="flex-1 p-8 bg-physics-surface border border-physics-border rounded-3xl relative shadow-physics">
-          <div className="absolute top-4 right-6 text-[10px] font-mono text-physics-accent uppercase">Example 2</div>
-          <h4 className="text-physics-text font-bold mb-4">Will electrons come out?</h4>
-          <div className="space-y-4 text-sm text-physics-text-dim">
+        <div className="flex-1 p-6 md:p-8 bg-physics-surface border border-physics-border rounded-2xl md:rounded-3xl relative shadow-physics">
+          <div className="absolute top-4 right-6 text-[8px] md:text-[10px] font-mono text-physics-accent uppercase">Example 2</div>
+          <h4 className="text-physics-text font-bold mb-2 md:mb-4 text-sm md:text-base">Will electrons come out?</h4>
+          <div className="space-y-2 md:space-y-4 text-xs md:text-sm text-physics-text-dim">
             <p>Light Energy = 1.83 eV</p>
             <p>Barrier Fee = 2.30 eV</p>
-            <div className="p-4 bg-red-900/10 border border-red-500/20 rounded-xl text-red-400 font-bold">
+            <div className="p-3 md:p-4 bg-red-900/10 border border-red-500/20 rounded-xl text-red-400 font-bold">
               Reason: Energy is <span className="underline">too low</span>. No emission.
             </div>
           </div>
@@ -825,24 +825,24 @@ export const Slide12_Problems = () => (
       </div>
 
       <div className="flex flex-col">
-        <div className="flex-1 p-12 bg-physics-accent/5 rounded-[50px] border border-physics-accent/20 relative">
-          <div className="absolute top-8 right-10 text-[10px] font-mono text-physics-accent uppercase">Example 3</div>
-          <h3 className="text-3xl font-black text-physics-text mb-6">Compton shift</h3>
-          <p className="text-physics-text-dim mb-8">
+        <div className="flex-1 p-8 md:p-12 bg-physics-accent/5 rounded-[30px] md:rounded-[50px] border border-physics-accent/20 relative">
+          <div className="absolute top-4 right-6 md:top-8 md:right-10 text-[8px] md:text-[10px] font-mono text-physics-accent uppercase">Example 3</div>
+          <h3 className="text-2xl md:text-3xl font-black text-physics-text mb-4 md:mb-6">Compton shift</h3>
+          <p className="text-xs md:text-physics-text-dim mb-4 md:mb-8">
             What is the shift when light bounces at <Latex formula="90^\circ" />?
           </p>
-          <div className="space-y-4 p-8 bg-physics-bg/50 rounded-3xl border border-physics-border">
-            <div className="flex items-center gap-4 text-physics-text">
-              <span className="text-physics-accent font-mono">STEP 1</span>
+          <div className="space-y-3 md:space-y-4 p-6 md:p-8 bg-physics-bg/50 rounded-2xl md:rounded-3xl border border-physics-border text-xs md:text-base">
+            <div className="flex items-center gap-3 md:gap-4 text-physics-text">
+              <span className="text-physics-accent font-mono text-[10px]">STEP 1</span>
               <Latex formula="\Delta \lambda = \lambda_c (1 - \cos 90^\circ)" />
             </div>
-            <div className="flex items-center gap-4 text-physics-text">
-              <span className="text-physics-accent font-mono">STEP 2</span>
+            <div className="flex items-center gap-3 md:gap-4 text-physics-text">
+              <span className="text-physics-accent font-mono text-[10px]">STEP 2</span>
               <Latex formula="\Delta \lambda = 0.00243 \times 1" />
             </div>
-            <div className="pt-6 border-t border-physics-border">
-              <div className="text-[10px] text-physics-text-dim mb-2 uppercase tracking-widest">Shift Result</div>
-              <div className="text-4xl font-black text-physics-accent">
+            <div className="pt-4 md:pt-6 border-t border-physics-border">
+              <div className="text-[8px] md:text-[10px] text-physics-text-dim mb-1 md:mb-2 uppercase tracking-widest">Shift Result</div>
+              <div className="text-2xl md:text-4xl font-black text-physics-accent">
                 <Latex formula="0.00243 \text{ nm}" />
               </div>
             </div>
@@ -863,17 +863,17 @@ export const Slide13_ThankYou = () => (
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1 }}
-      className="z-10 text-center"
+      className="z-10 text-center w-full px-4"
     >
-      <h1 className="text-[12rem] font-black text-physics-text italic tracking-tighter leading-none mb-4">
+      <h1 className="text-6xl md:text-[12rem] font-black text-physics-text italic tracking-tighter leading-none mb-4 uppercase">
         QUESTIONS<span className="text-physics-accent">?</span>
       </h1>
-      <div className="h-1 w-24 bg-physics-accent mx-auto mb-12" />
+      <div className="h-1 w-12 md:w-24 bg-physics-accent mx-auto mb-8 md:mb-12" />
 
-      <div className="flex gap-24 text-left justify-center">
-        <div>
-          <h4 className="text-xs font-mono uppercase text-physics-accent tracking-widest mb-4">Team Members</h4>
-          <div className="space-y-1 text-sm text-physics-text-dim font-mono">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-24 text-left justify-center items-center md:items-start">
+        <div className="text-center md:text-left">
+          <h4 className="text-[10px] md:text-xs font-mono uppercase text-physics-accent tracking-widest mb-2 md:mb-4">Team Members</h4>
+          <div className="space-y-1 text-xs md:text-sm text-physics-text-dim font-mono">
             <p>• Alpha One</p>
             <p>• Beta Two</p>
             <p>• Gamma Three</p>
@@ -881,9 +881,9 @@ export const Slide13_ThankYou = () => (
             <p>• Epsilon Five</p>
           </div>
         </div>
-        <div>
-          <h4 className="text-xs font-mono uppercase text-physics-accent tracking-widest mb-4">Course Info</h4>
-          <div className="text-sm text-physics-text-dim font-mono">
+        <div className="text-center md:text-left">
+          <h4 className="text-[10px] md:text-xs font-mono uppercase text-physics-accent tracking-widest mb-2 md:mb-4">Course Info</h4>
+          <div className="text-xs md:text-sm text-physics-text-dim font-mono">
             <p className="text-physics-text font-bold">PHY 102: Physics II</p>
             <p>Sumaiya Alam Chowdhury</p>
             <p>Lecturer, DIU</p>
