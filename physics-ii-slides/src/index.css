@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-physics-bg: #0a0a1a;
+  --color-physics-accent: #00d4ff;
+  --color-physics-accent-dim: rgba(0, 212, 255, 0.2);
+  --color-physics-neon: #00f2ff;
+}
+
+@layer base {
+  body {
+    @apply bg-physics-bg text-gray-100 overflow-hidden;
+  }
+}
+
+.katex {
+  @apply text-physics-accent;
+}
+
+.katex-display {
+  @apply my-4;
+}
