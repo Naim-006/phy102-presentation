@@ -5,15 +5,45 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
-  --color-physics-bg: #0a0a1a;
-  --color-physics-accent: #00d4ff;
-  --color-physics-accent-dim: rgba(0, 212, 255, 0.2);
+  --color-physics-bg: var(--physics-bg);
+  --color-physics-surface: var(--physics-surface);
+  --color-physics-text: var(--physics-text);
+  --color-physics-text-dim: var(--physics-text-dim);
+  --color-physics-border: var(--physics-border);
+  --color-physics-accent: var(--physics-accent);
+  --color-physics-accent-dim: var(--physics-accent-dim);
   --color-physics-neon: #00f2ff;
+  
+  --shadow-physics: var(--physics-shadow);
+}
+
+:root {
+  --physics-bg: #0a0a1a;
+  --physics-surface: #111827;
+  --physics-text: #f3f4f6;
+  --physics-text-dim: #9ca3af;
+  --physics-border: rgba(255, 255, 255, 0.1);
+  --physics-accent: #00d4ff;
+  --physics-accent-dim: rgba(0, 212, 255, 0.2);
+  --physics-grid: rgba(128, 128, 128, 0.08);
+  --physics-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.light {
+  --physics-bg: #fdfdfe;
+  --physics-surface: #ffffff;
+  --physics-text: #09090b;
+  --physics-text-dim: #3f3f46;
+  --physics-border: rgba(0, 0, 0, 0.08);
+  --physics-accent: #2563eb;
+  --physics-accent-dim: rgba(37, 99, 235, 0.1);
+  --physics-grid: rgba(0, 0, 0, 0.04);
+  --physics-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
 }
 
 @layer base {
   body {
-    @apply bg-physics-bg text-gray-100 overflow-hidden;
+    @apply bg-physics-bg text-physics-text transition-colors duration-300 overflow-hidden;
   }
 }
 
@@ -23,4 +53,11 @@
 
 .katex-display {
   @apply my-4;
+}
+
+.grid-background {
+  background-image: 
+    linear-gradient(to right, var(--physics-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--physics-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

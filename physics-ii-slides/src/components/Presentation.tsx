@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Maximize2, Zap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, Zap, Sun, Moon } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
 interface PresentationProps {
@@ -9,7 +9,14 @@ interface PresentationProps {
 
 export const Presentation = ({ children }: PresentationProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const totalSlides = React.Children.count(children);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('light', theme === 'light');
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1 < totalSlides ? prev + 1 : prev));
@@ -31,9 +38,7 @@ export const Presentation = ({ children }: PresentationProps) => {
   return (
     <div className="relative w-screen h-screen flex items-center justify-center bg-physics-bg overflow-hidden font-sans">
       {/* Background Effect */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </div>
+      <div className="absolute inset-0 z-0 opacity-50 pointer-events-none grid-background" />
 
       {/* Progress Bar */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gray-900 z-50">
@@ -63,20 +68,27 @@ export const Presentation = ({ children }: PresentationProps) => {
 
       {/* Navigation Overlay */}
       <div className="absolute bottom-6 right-8 flex items-center gap-4 z-50">
-        <div className="text-xs font-mono text-gray-500 tracking-widest mr-4">
+        <button 
+          onClick={toggleTheme}
+          className="p-2 mr-2 rounded-lg border border-physics-border bg-physics-surface hover:border-physics-accent hover:text-physics-accent transition-all text-physics-text/70"
+          title="Toggle Theme"
+        >
+          {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
+        <div className="text-xs font-mono text-physics-text-dim tracking-widest mr-4">
           {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
         </div>
         <button 
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="p-2 rounded-full border border-gray-800 hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30"
+          className="p-2 rounded-full border border-physics-border hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30 text-physics-text"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button 
           onClick={nextSlide}
           disabled={currentSlide === totalSlides - 1}
-          className="p-2 rounded-full border border-gray-800 hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30"
+          className="p-2 rounded-full border border-physics-border hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30 text-physics-text"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -96,7 +108,7 @@ export const SlideLayout = ({ children, title, subtitle }: { children: React.Rea
     <div className="w-full h-full flex flex-col p-12">
       {(title || subtitle) && (
         <header className="mb-12 border-l-4 border-physics-accent pl-6">
-          {title && <h2 className="text-4xl font-bold tracking-tight text-white uppercase italic">{title}</h2>}
+          {title && <h2 className="text-4xl font-bold tracking-tight text-physics-text uppercase italic">{title}</h2>}
           {subtitle && <p className="text-physics-accent text-sm font-mono mt-1 uppercase tracking-[0.2em]">{subtitle}</p>}
         </header>
       )}
