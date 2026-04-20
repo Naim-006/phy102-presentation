@@ -14,11 +14,11 @@ export const Presentation = ({ children }: PresentationProps) => {
   const [isPortrait, setIsPortrait] = useState(false);
   const totalSlides = React.Children.count(children);
   const PRESENTERS = [
-    { start: 0, end: 3, name: "Naim Hossain", id: "252-15-178" },
-    { start: 4, end: 5, name: "Md Ajmine Adil Sadik", id: "252-15-172" },
-    { start: 6, end: 7, name: "Jannat Ferdous Asha", id: "252-15-179" },
-    { start: 8, end: 8, name: "Diya Bipasha", id: "252-15-652" },
-    { start: 9, end: 10, name: "Tasneem Binte Aziz", id: "252-15-070" },
+     { start: 0, end: 5, name: "Naim Hossain", id: "252-15-178" },
+    { start: 6, end: 7, name: "Md Ajmine Adil Sadik", id: "252-15-172" },
+    { start: 8, end: 9, name: "Jannat Ferdous Asha", id: "252-15-179" },
+    { start: 10, end: 10, name: "Diya Bipasha", id: "252-15-652" },
+    { start: 11, end: 12, name: "Tasneem Binte Aziz", id: "252-15-070" },
   ];
 
   const currentPresenter = PRESENTERS.find(p => currentSlide >= p.start && currentSlide <= p.end);
