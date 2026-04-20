@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Maximize2, Zap, Sun, Moon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, Zap, Sun, Moon, Download, Loader2 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
+import { toPng } from 'html-to-image';
+import jsPDF from 'jspdf';
+import pptxgen from 'pptxgenjs';
+
+export const PresentationContext = React.createContext<{
+  exportPresentation: (format: 'pdf' | 'pptx') => Promise<void>;
+  isExporting: boolean;
+} | null>(null);
 
 interface PresentationProps {
   children: React.ReactNode[];
@@ -12,9 +20,12 @@ export const Presentation = ({ children }: PresentationProps) => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [scale, setScale] = useState(1);
   const [isPortrait, setIsPortrait] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportProgress, setExportProgress] = useState(0);
+  const slideRef = React.useRef<HTMLDivElement>(null);
   const totalSlides = React.Children.count(children);
   const PRESENTERS = [
-     { start: 0, end: 5, name: "Naim Hossain", id: "252-15-178" },
+    { start: 0, end: 5, name: "Naim Hossain", id: "252-15-178" },
     { start: 6, end: 7, name: "Md Ajmine Adil Sadik", id: "252-15-172" },
     { start: 8, end: 9, name: "Jannat Ferdous Asha", id: "252-15-179" },
     { start: 10, end: 10, name: "Diya Bipasha", id: "252-15-652" },
@@ -63,6 +74,84 @@ export const Presentation = ({ children }: PresentationProps) => {
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
+  const exportPresentation = async (format: 'pdf' | 'pptx') => {
+    if (isExporting || !slideRef.current) return;
+
+    const originalSlide = currentSlide;
+    setIsExporting(true);
+    setExportProgress(0);
+
+    const images: string[] = [];
+
+    try {
+      // Ensure all fonts are loaded before starting
+      await document.fonts.ready;
+
+      for (let i = 0; i < totalSlides; i++) {
+        setCurrentSlide(i);
+        setExportProgress((i / totalSlides) * 100);
+
+        // Wait longer for slide transition and math rendering to fully settle
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const dataUrl = await toPng(slideRef.current, {
+          quality: 1,
+          pixelRatio: 4, // Extreme quality
+          backgroundColor: '#0a0a0a',
+          skipFonts: false,
+          filter: (node) => {
+            const classList = (node as HTMLElement).classList;
+            return !classList?.contains('z-50') && !classList?.contains('z-[60]');
+          }
+        });
+
+        images.push(dataUrl);
+      }
+
+      setExportProgress(100);
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      if (format === 'pdf') {
+        const pdf = new jsPDF(isPortrait ? 'p' : 'l', 'px', [isPortrait ? 720 : 1280, isPortrait ? 1280 : 720]);
+        images.forEach((img, idx) => {
+          if (idx > 0) pdf.addPage();
+          pdf.addImage(img, 'PNG', 0, 0, isPortrait ? 720 : 1280, isPortrait ? 1280 : 720);
+        });
+        pdf.save(`Physics II - Presentation - ${new Date().toLocaleDateString()}.pdf`);
+      } else {
+        const pptx = new pptxgen();
+
+        // Define slide aspect ratio to match our 16:9 or 9:16 target exactly
+        if (isPortrait) {
+          pptx.defineLayout({ name: 'PHYSICS_MOBILE', width: 5.06, height: 9 });
+          pptx.layout = 'PHYSICS_MOBILE';
+        } else {
+          pptx.layout = 'LAYOUT_16x9';
+        }
+
+        images.forEach((img, idx) => {
+          const slide = pptx.addSlide();
+          // Use addImage to cover entire slide area for better DPI handling
+          slide.addImage({
+            data: img,
+            x: 0,
+            y: 0,
+            w: isPortrait ? 5.06 : 10,
+            h: isPortrait ? 9 : 5.625
+          });
+        });
+
+        pptx.writeFile({ fileName: `Physics II - Presentation - ${new Date().toLocaleDateString()}.pptx` });
+      }
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setCurrentSlide(originalSlide);
+      setIsExporting(false);
+      setExportProgress(0);
+    }
+  };
+
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1 < totalSlides ? prev + 1 : prev));
   }, [totalSlides]);
@@ -103,7 +192,7 @@ export const Presentation = ({ children }: PresentationProps) => {
   }, [nextSlide, prevSlide]);
 
   return (
-    <div 
+    <div
       className="relative w-screen h-screen flex items-center justify-center bg-physics-bg overflow-hidden font-sans touch-none"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
@@ -113,14 +202,29 @@ export const Presentation = ({ children }: PresentationProps) => {
       <div className="absolute inset-0 z-0 opacity-50 pointer-events-none grid-background" />
 
       {/* Progress Bar */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gray-900 z-50">
-        <motion.div 
-          className="h-full bg-physics-accent shadow-[0_0_10px_#00d4ff]"
-          initial={{ width: 0 }}
-          animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-          transition={{ duration: 0.3 }}
-        />
-      </div>
+      {/* Export Overlay */}
+      <AnimatePresence>
+        {isExporting && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-[100] bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center"
+          >
+            <Loader2 className="w-16 h-16 text-physics-accent animate-spin mb-8" />
+            <h2 className="text-4xl font-black text-white italic tracking-tighter mb-4">GENERATING ASSETS</h2>
+            <div className="w-64 h-2 bg-gray-800 rounded-full overflow-hidden border border-white/10">
+              <motion.div
+                className="h-full bg-physics-accent shadow-[0_0_20px_#00d4ff]"
+                animate={{ width: `${exportProgress}%` }}
+              />
+            </div>
+            <p className="mt-4 text-physics-text-dim font-mono text-xs uppercase tracking-widest">
+              Capturing Slide {Math.ceil((exportProgress / 100) * totalSlides)} of {totalSlides}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Presenter Name - Top Right corner for the 1st slide of each presenter */}
       <AnimatePresence>
@@ -143,31 +247,35 @@ export const Presentation = ({ children }: PresentationProps) => {
       </AnimatePresence>
 
       {/* Slide Container with Dual Scaling */}
-      <div 
-        className="relative flex items-center justify-center transition-all duration-500 ease-in-out origin-center"
-        style={{ 
-          width: isPortrait ? '720px' : '1280px', 
-          height: isPortrait ? '1280px' : '720px', 
-          transform: `scale(${scale})` 
+      {/* Slide Container with Dual Scaling */}
+      <div
+        ref={slideRef}
+        className="relative flex items-center justify-center transition-all duration-500 ease-in-out origin-center bg-physics-bg"
+        style={{
+          width: isPortrait ? '720px' : '1280px',
+          height: isPortrait ? '1280px' : '720px',
+          transform: `scale(${scale})`
         }}
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide + (isPortrait ? '-p' : '-l')}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="w-full h-full"
-          >
-            {React.Children.toArray(children)[currentSlide]}
-          </motion.div>
-        </AnimatePresence>
+        <PresentationContext.Provider value={{ exportPresentation, isExporting }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide + (isPortrait ? '-p' : '-l')}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="w-full h-full"
+            >
+              {React.Children.toArray(children)[currentSlide]}
+            </motion.div>
+          </AnimatePresence>
+        </PresentationContext.Provider>
       </div>
 
       {/* Navigation Overlay */}
       <div className="absolute bottom-4 sm:bottom-6 left-1/2 sm:left-auto sm:right-8 -translate-x-1/2 sm:translate-x-0 flex items-center gap-4 z-50 bg-physics-surface/80 sm:bg-transparent p-2 sm:p-0 rounded-full border border-physics-border sm:border-none backdrop-blur-sm sm:backdrop-blur-none">
-        <button 
+        <button
           onClick={toggleTheme}
           className="p-3 sm:p-2 rounded-lg border border-physics-border bg-physics-surface hover:border-physics-accent hover:text-physics-accent transition-all text-physics-text/70"
           title="Toggle Theme"
@@ -177,14 +285,14 @@ export const Presentation = ({ children }: PresentationProps) => {
         <div className="text-[10px] sm:text-xs font-mono text-physics-text-dim tracking-widest px-2 sm:px-0 sm:mr-4">
           {String(currentSlide + 1).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
         </div>
-        <button 
+        <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
           className="p-3 sm:p-2 rounded-full border border-physics-border hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30 text-physics-text bg-physics-surface"
         >
           <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5" />
         </button>
-        <button 
+        <button
           onClick={nextSlide}
           disabled={currentSlide === totalSlides - 1}
           className="p-3 sm:p-2 rounded-full border border-physics-border hover:border-physics-accent hover:text-physics-accent transition-all disabled:opacity-30 text-physics-text bg-physics-surface"
@@ -195,7 +303,6 @@ export const Presentation = ({ children }: PresentationProps) => {
 
       {/* Logo/Identity - Hidden on small mobile */}
       <div className="hidden sm:flex absolute bottom-6 left-8 items-center gap-2 opacity-50 z-50">
-        
       </div>
     </div>
   );

@@ -7,8 +7,10 @@ import { Presentation } from './components/Presentation';
 import {
   Slide1_Title,
   Slide2_TOC,
+  Slide_Duality,
   Slide3_PEIntro,
   Slide4_Threshold,
+  Slide_SolarPanel,
   Slide5_EinsteinEquation,
   Slide6_Cell,
   Slide7_ComptonIntro,
@@ -23,8 +25,10 @@ export default function App() {
     <Presentation>
       <Slide1_Title />
       <Slide2_TOC />
+      <Slide_Duality />
       <Slide3_PEIntro />
       <Slide4_Threshold />
+      <Slide_SolarPanel />
       <Slide5_EinsteinEquation />
       <Slide6_Cell />
       <Slide7_ComptonIntro />

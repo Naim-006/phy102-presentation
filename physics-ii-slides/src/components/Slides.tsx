@@ -140,12 +140,12 @@ export const Slide1_Title = () => (
       </div>
 
       <h1 className="text-7xl font-black text-physics-text italic tracking-tighter mb-4 leading-none">
-        PHOTOELECTRIC <br />
-        <span className="text-physics-accent">& COMPTON</span>
+        PHOTOELECTRIC EFFECT<br />
+        <span className="text-physics-accent">& COMPTON EFFECT</span>
       </h1>
 
       <p className="text-2xl text-physics-text-dim font-light mb-12">
-        Modern Physics Made Simple
+
       </p>
 
       <div className="grid grid-cols-2 gap-12 text-left bg-physics-surface border border-physics-border rounded-[40px] p-10 shadow-physics">
@@ -908,16 +908,16 @@ export const Slide9_Derivation = () => {
 
 export const Slide10_Comparison = () => {
   const tableData = [
-    { feature: "Core Idea", compton: "Light collides with electrons and bounces with reduced energy", pe: "Light is absorbed and releases electrons from surface" },
-    { feature: "What we see", compton: "X-ray/γ-ray photon deflects after hitting matter", pe: "Light knocks out electrons from a material" },
-    { feature: "Scientific Proof", compton: "Light carries momentum (push effect)", pe: "Light carries quantized energy (E = hν)" },
-    { feature: "Real-life Case", compton: "Cancer radiation therapy (X-rays scattering in tissue)", pe: "Digital camera sensor converting light into image" },
-    { feature: "Industrial Use", compton: "Material inspection & radiation-based imaging", pe: "Solar cells, automatic doors, light sensors" },
-    { feature: "Particle View", compton: "Photon behaves like a billiard ball collision", pe: "Photon behaves like an energy packet (quantum)" },
+    { feature: "Concept", compton: "Light bounces off an electron and loses energy", pe: "Light gets absorbed and knocks out an electron" },
+    { feature: "Appearance", compton: "X-ray/γ-ray photon changes direction", pe: "Light knocks out an electron" },
+    { feature: "Proof", compton: "Photons carry momentum (Push)", pe: "Photons carry energy (E = hν)" },
+    { feature: "Example", compton: "Medical X-rays scattering in the body", pe: "Digital camera sensors capturing light" },
+    { feature: "Use", compton: "Industrial inspections", pe: "Solar panels, automatic doors" },
+    { feature: "Nature", compton: "Particle acting like a billiard ball", pe: "Particle acting like an energy packet" },
   ];
 
   return (
-    <SlideLayout title="Quick Comparison" subtitle="Comparing the two effects">
+    <SlideLayout title="Comparison" subtitle="Summary Table">
       <div className="mt-8 overflow-hidden rounded-[40px] border border-white/5 shadow-2xl">
         <table className="w-full text-left border-collapse">
           <thead>
