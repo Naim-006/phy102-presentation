@@ -178,10 +178,12 @@ export const Slide2_TOC = () => (
             <Lightbulb className="w-5 h-5" /> PHOTOELECTRIC EFFECT
           </h3>
           <StaggeredList items={[
-            "Core Definitions & Principles",
-            "Threshold Freq. & Work Function",
-            "Einstein's Equation (Derivation)",
-            "Types of Photoelectric Cells"
+            "The Wave-Particle Paradox",
+            "History & Basic Mechanism",
+            "Energy Thresholds ($\nu_0$ and $\Phi$)",
+            "Real World: Solar Energy",
+            "Einstein's Quantum Equation",
+            "Types of Photo-Cells"
           ]} />
         </section>
       </div>
@@ -202,32 +204,139 @@ export const Slide2_TOC = () => (
   </SlideLayout>
 );
 
+export const Slide_Duality = () => {
+  return (
+    <SlideLayout title="The Nature of Light" subtitle="Wave or Particle?">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+        <div className="space-y-6">
+          <p className="text-2xl md:text-3xl text-physics-text font-light leading-relaxed">
+            Does light behave like a <span className="text-blue-400 font-medium">Wave</span> or a <span className="text-physics-accent font-medium">Particle</span>?
+          </p>
+          <div className="space-y-4">
+            <div className="p-6 bg-blue-500/5 border border-blue-500/20 rounded-2xl">
+              <h4 className="text-blue-400 font-bold mb-2 uppercase text-xs tracking-widest">Wave Model</h4>
+              <p className="text-physics-text-dim text-sm">Light travels as a wave through space. This explains how it bends around corners (diffraction) and overlaps (interference).</p>
+            </div>
+            <div className="p-6 bg-physics-accent/5 border border-physics-accent/20 rounded-2xl">
+              <h4 className="text-physics-accent font-bold mb-2 uppercase text-xs tracking-widest">Particle Model</h4>
+              <p className="text-physics-text-dim text-sm">Light also acts like tiny packets of energy called <span className="text-physics-text font-bold">Photons</span>. This is how light interacts with electrons on a surface.</p>
+            </div>
+          </div>
+          <div className="p-4 bg-physics-surface border border-physics-border rounded-xl italic text-physics-text-dim text-center">
+            "Light has a dual nature, appearing as either a wave or a particle depending on the experiment."
+          </div>
+        </div>
+
+        <div className="relative h-[400px] bg-black/40 rounded-[40px] border border-physics-border overflow-hidden flex flex-col items-center justify-center">
+          <div className="absolute inset-x-0 top-12 text-center">
+            <span className="text-[10px] font-mono text-physics-text-dim uppercase tracking-[0.3em]">Theoretical Visualization</span>
+          </div>
+
+          <div className="relative w-full h-40 flex items-center justify-center">
+            <motion.svg
+              viewBox="0 0 400 100"
+              className="absolute w-full h-full"
+              animate={{ opacity: [0, 1, 1, 0, 0] }}
+              transition={{ duration: 6, repeat: Infinity, times: [0, 0.1, 0.45, 0.5, 1] }}
+            >
+              <motion.path
+                d="M 0 50 Q 25 10, 50 50 T 100 50 T 150 50 T 200 50 T 250 50 T 300 50 T 350 50 T 400 50"
+                fill="transparent"
+                stroke="#3b82f6"
+                strokeWidth="4"
+                animate={{
+                  d: [
+                    "M 0 50 Q 25 10, 50 50 T 100 50 T 150 50 T 200 50 T 250 50 T 300 50 T 350 50 T 400 50",
+                    "M 0 50 Q 25 90, 50 50 T 100 50 T 150 50 T 200 50 T 250 50 T 300 50 T 350 50 T 400 50",
+                    "M 0 50 Q 25 10, 50 50 T 100 50 T 150 50 T 200 50 T 250 50 T 300 50 T 350 50 T 400 50"
+                  ]
+                }}
+                transition={{ duration: 1, repeat: Infinity }}
+              />
+            </motion.svg>
+
+            <div className="absolute inset-0 flex items-center justify-around px-8">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="w-8 h-8 rounded-full bg-physics-accent shadow-[0_0_20px_#00d4ff] flex items-center justify-center text-[10px] font-black text-black"
+                  animate={{
+                    opacity: [0, 0, 1, 1, 0],
+                    scale: [0.5, 0.5, 1.2, 1, 0.8],
+                    x: [0, 0, 0, 20, 40]
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    times: [0, 0.5, 0.6, 0.9, 1],
+                    delay: i * 0.1
+                  }}
+                >
+                  hf
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex gap-12">
+            <motion.div
+              className="text-center"
+              animate={{ opacity: [1, 1, 0.3, 0.3, 1] }}
+              transition={{ duration: 6, repeat: Infinity, times: [0, 0.45, 0.5, 0.95, 1] }}
+            >
+              <div className="text-blue-400 font-black text-2xl uppercase">Wave view</div>
+              <div className="text-[10px] text-blue-400/60 uppercase font-mono tracking-widest mt-1">Light Travels</div>
+            </motion.div>
+            <div className="w-1 h-8 bg-physics-border" />
+            <motion.div
+              className="text-center"
+              animate={{ opacity: [0.3, 0.3, 1, 1, 0.3] }}
+              transition={{ duration: 6, repeat: Infinity, times: [0, 0.45, 0.5, 0.95, 1] }}
+            >
+              <div className="text-physics-accent font-black text-2xl uppercase">Particle View</div>
+              <div className="text-[10px] text-physics-accent/60 uppercase font-mono tracking-widest mt-1">Light Hits</div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </SlideLayout>
+  );
+};
+
 export const Slide3_PEIntro = () => {
   return (
-    <SlideLayout title="The Basic Mechanism" subtitle="Light as a Particle (Photon)">
+    <SlideLayout title="The Photoelectric Effect" subtitle="Heinrich Hertz (1857–1894) | Basic Mechanism">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
         <div className="space-y-4 md:space-y-6">
-          <p className="text-2xl md:text-3xl text-physics-text font-light leading-relaxed">
-            When <span className="text-physics-accent font-medium">light hits a metal</span>, it can knock electrons out.
+          <div className="flex items-center gap-6 mb-4">
+            <div className="w-24 h-24 rounded-2xl border-2 border-physics-accent/30 overflow-hidden shadow-2xl">
+              <img src="/heinrich_hertz_portrait.png" alt="Heinrich Hertz" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            </div>
+            <div>
+              <h4 className="text-physics-accent font-bold uppercase text-[10px] tracking-widest">Historical Scientist</h4>
+              <p className="text-physics-text font-black text-xl italic leading-none">Heinrich Hertz</p>
+              <p className="text-[10px] text-physics-text-dim mt-2 font-mono uppercase">Discovered the effect in 1887</p>
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-black text-physics-text uppercase italic tracking-tighter">PHOTOELECTRIC EFFECT</h2>
+
+          <p className="text-xl md:text-2xl text-physics-text font-light leading-snug">
+            When <span className="text-physics-accent font-medium">light hits a metal surface</span>, it provides energy that allows <span className="text-physics-accent font-medium">electrons to be released</span>.
           </p>
-          <p className="text-base md:text-lg text-physics-text-dim">
-            It acts like a stream of energy balls called <span className="text-physics-text font-bold">Photons</span>. One photon kicks one electron!
+          <p className="text-sm md:text-base text-physics-text-dim leading-relaxed">
+            This process happens when <span className="text-physics-text font-bold">Light Photons (Quanta)</span> strike electrons, following the <span className="text-physics-text font-bold italic">One-to-One Interaction Principle</span>.
           </p>
-          <div className="p-6 bg-physics-surface border border-physics-border rounded-[30px] shadow-physics">
-            <h4 className="text-physics-accent font-bold mb-4 uppercase text-[10px] tracking-widest">Real World Impact</h4>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-yellow-500" />
-                </div>
-                <p className="text-physics-text-dim text-sm">Solar energy starts exactly like this.</p>
+
+          <div className="p-4 bg-physics-surface border border-physics-border rounded-2xl shadow-physics">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-yellow-500" />
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-physics-bg flex items-center justify-center border border-physics-border">
-                  <Lightbulb className="w-5 h-5 text-physics-accent" />
-                </div>
-                <p className="text-physics-text-dim text-sm">Street lights "sense" night using this theory.</p>
-              </div>
+              <p className="text-physics-text-dim text-[10px] uppercase font-bold tracking-widest italic leading-tight">
+                Condition for Release:<br />
+                <span className="text-physics-text">Light Frequency == Threshold Frequency »» Release Electron</span>
+              </p>
             </div>
           </div>
         </div>
@@ -235,7 +344,7 @@ export const Slide3_PEIntro = () => {
         <div className="rounded-[40px] border border-physics-border bg-black/80 dark:bg-black p-4 md:p-8 flex items-center justify-center relative overflow-hidden h-[300px] md:h-[450px]">
           <div className="relative w-full h-full">
             <div className="absolute top-0 left-0 p-4 bg-physics-accent text-black text-[10px] font-bold uppercase rounded-br-2xl z-20">
-              Interactive Simulation: Impact
+              Interactive Simulation: Photon Impact
             </div>
 
             {/* Metal Surface */}
@@ -250,7 +359,7 @@ export const Slide3_PEIntro = () => {
                   />
                 ))}
               </div>
-              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mt-2">Surface Electrons</span>
+              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mt-2">Metal Surface</span>
             </div>
 
             {/* Synchronized Animation Loop */}
@@ -321,20 +430,20 @@ export const Slide4_Threshold = () => {
   const [isHighEnergy, setIsHighEnergy] = useState(true);
 
   return (
-    <SlideLayout title="Energy Barriers" subtitle="Frequency & Work Function">
+    <SlideLayout title="Energy Thresholds" subtitle="Work Function & Threshold Frequency">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 h-full items-center">
         <div className="space-y-4 md:space-y-8">
           <section className="bg-physics-surface p-8 rounded-2xl border border-physics-border shadow-physics">
             <h3 className="text-2xl font-bold text-physics-text mb-2 italic">1. Threshold Frequency (<Latex formula="\nu_0" />)</h3>
             <p className="text-physics-text-dim leading-relaxed">
-              The <span className="text-physics-accent font-bold">"Minimum Start Frequency"</span>. If light is too weak (low frequency), no electrons come out.
+              The <span className="text-physics-accent font-bold">minimum starting frequency</span> required to release electrons. If the light frequency is too low, no electrons will be emitted regardless of brightness.
             </p>
           </section>
 
           <section className="bg-physics-surface p-8 rounded-2xl border border-physics-border shadow-physics">
             <h3 className="text-2xl font-bold text-physics-text mb-2 italic">2. Work Function (<Latex formula="\Phi" />)</h3>
             <p className="text-physics-text-dim leading-relaxed">
-              The <span className="text-physics-accent font-bold">"Entry Fee"</span>. The amount of energy needed to just pull an electron out of the metal.
+              The <span className="text-physics-accent font-bold">minimum energy barrier</span> that an electron must overcome to escape from the metal's surface.
             </p>
             <div className="text-3xl text-physics-accent mt-4">
               <Latex formula="\Phi = h\nu_0" />
@@ -343,7 +452,7 @@ export const Slide4_Threshold = () => {
         </div>
 
         <div className="p-8 bg-physics-accent/5 border border-physics-accent/20 rounded-2xl flex flex-col h-full relative overflow-hidden">
-          <h4 className="text-physics-accent font-bold uppercase text-[10px] tracking-[0.3em] mb-4">Interactive Experiment</h4>
+          <h4 className="text-physics-accent font-bold uppercase text-[10px] tracking-[0.3em] mb-4">Experimental Observation</h4>
 
           <div className="flex gap-4 mb-8">
             <button
@@ -353,7 +462,7 @@ export const Slide4_Threshold = () => {
                 !isHighEnergy ? "bg-red-500 border-red-500 text-white" : "bg-gray-900 border-white/5 text-gray-400"
               )}
             >
-              Red (Low ν)
+              Frequency too Low
             </button>
             <button
               onClick={() => setIsHighEnergy(true)}
@@ -362,7 +471,7 @@ export const Slide4_Threshold = () => {
                 isHighEnergy ? "bg-physics-accent border-physics-accent text-black" : "bg-gray-900 border-white/5 text-gray-400"
               )}
             >
-              Blue (High ν)
+              Enough frequency
             </button>
           </div>
 
@@ -375,7 +484,6 @@ export const Slide4_Threshold = () => {
               </div>
             </div>
 
-            {/* Animation Logic */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={isHighEnergy ? 'high' : 'low'}
@@ -414,7 +522,7 @@ export const Slide4_Threshold = () => {
                 "text-[10px] font-black uppercase tracking-widest",
                 isHighEnergy ? "text-physics-accent" : "text-red-400"
               )}>
-                {isHighEnergy ? "Enough Energy!" : "Energy too Low"}
+                {isHighEnergy ? "Criterion Satisfied" : "Energy Insufficient"}
               </span>
             </div>
           </div>
@@ -424,16 +532,137 @@ export const Slide4_Threshold = () => {
   );
 };
 
+export const Slide_SolarPanel = () => {
+  return (
+    <SlideLayout title="How Solar Panels Work" subtitle="Practical Use of the Photoelectric Effect">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+        <div className="space-y-6">
+          <div className="p-8 bg-physics-accent/5 border-2 border-physics-accent/20 rounded-[40px] shadow-physics">
+            <h3 className="text-2xl font-bold text-physics-text mb-4 italic flex items-center gap-3">
+              <Zap className="text-yellow-500" /> Photovoltaic Mechanism
+            </h3>
+            <ul className="space-y-4">
+              <li className="flex gap-4">
+                <div className="w-6 h-6 rounded-full bg-physics-accent flex items-center justify-center text-black font-bold text-xs flex-shrink-0">1</div>
+                <p className="text-physics-text-dim text-sm"><span className="text-physics-text font-bold">Sunlight Hits:</span> Solar radiation striking the silicon material provides energy.</p>
+              </li>
+              <li className="flex gap-4">
+                <div className="w-6 h-6 rounded-full bg-physics-accent flex items-center justify-center text-black font-bold text-xs flex-shrink-0">2</div>
+                <p className="text-physics-text-dim text-sm"><span className="text-physics-text font-bold">Electron Release:</span> This energy allows electrons to break free from their atoms.</p>
+              </li>
+              <li className="flex gap-4">
+                <div className="w-6 h-6 rounded-full bg-physics-accent flex items-center justify-center text-black font-bold text-xs flex-shrink-0">3</div>
+                <p className="text-physics-text-dim text-sm"><span className="text-physics-text font-bold">Power Generation:</span> These released electrons move through a circuit, producing electricity.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 bg-physics-surface border border-physics-border rounded-2xl text-center">
+              <div className="text-physics-accent font-bold text-xl italic tracking-tighter">~23.5%</div>
+              <div className="text-[10px] text-physics-text-dim uppercase tracking-widest mt-1">Solar Efficiency</div>
+            </div>
+            <div className="p-4 bg-physics-surface border border-physics-border rounded-2xl text-center">
+              <div className="text-physics-accent font-bold text-xl italic tracking-tighter">Clean Energy</div>
+              <div className="text-[10px] text-physics-text-dim uppercase tracking-widest mt-1">Zero Emissions</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative h-[450px] bg-black/60 rounded-[50px] border border-physics-border overflow-hidden p-8 flex flex-col items-center justify-center">
+          {/* Sunlight */}
+          <div className="absolute top-0 right-0 p-8">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <Lightbulb className="w-12 h-12 text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]" />
+              <div className="text-[8px] text-yellow-400/50 uppercase font-black text-center mt-2 tracking-tighter">Sunlight</div>
+            </motion.div>
+          </div>
+
+          {/* Solar Panel Schematic */}
+          <div className="relative w-full aspect-video bg-gray-900 border-4 border-gray-800 rounded-xl overflow-hidden shadow-2xl">
+            {/* Grid Lines */}
+            <div className="absolute inset-0 grid grid-cols-6 grid-rows-4">
+              {[...Array(24)].map((_, i) => (
+                <div key={i} className="border-[0.5px] border-blue-900/30" />
+              ))}
+            </div>
+
+            {/* Influx of Photons */}
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={`p-${i}`}
+                className="absolute top-[-20px] right-20"
+                animate={{
+                  x: [-150, -300],
+                  y: [0, 150],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.4,
+                  ease: "linear"
+                }}
+              >
+                <WavePacket color="#fbbf24" frequency={0.2} className="w-12 opacity-60" />
+              </motion.div>
+            ))}
+
+            {/* Flow of Electrons */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={`e-${i}`}
+                className="absolute bottom-4 left-4 w-2 h-2 bg-blue-400 rounded-full shadow-[0_0_10px_#60a5fa] z-20"
+                animate={{
+                  x: [0, 400, 400, 0, 0],
+                  y: [0, 0, -100, -100, 0],
+                  opacity: [0, 1, 1, 1, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: i * 0.5,
+                  times: [0, 0.4, 0.5, 0.9, 1]
+                }}
+              />
+            ))}
+
+            <div className="absolute bottom-0 inset-x-0 h-1 bg-physics-accent/20" />
+            <div className="absolute right-0 inset-y-0 w-1 bg-physics-accent/20" />
+          </div>
+
+          {/* Connected Device (Bulb) */}
+          <motion.div
+            className="mt-12 flex flex-col items-center"
+            animate={{ filter: ["brightness(0.5)", "brightness(1.5)", "brightness(0.5)"] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="p-4 rounded-full bg-physics-surface border-2 border-physics-accent shadow-[0_0_40px_rgba(0,212,255,0.3)]">
+              <Zap className="w-8 h-8 text-physics-accent" />
+            </div>
+            <span className="text-[10px] text-physics-accent font-black uppercase tracking-widest mt-4">Electric Current</span>
+          </motion.div>
+
+          <div className="absolute bottom-4 text-[8px] font-mono text-physics-text-dim uppercase tracking-[0.4em]">Integrated Circuit Model</div>
+        </div>
+      </div>
+    </SlideLayout>
+  );
+};
+
 export const Slide5_EinsteinEquation = () => {
   const steps = [
-    { label: "One Photon (hν) hits the surface.", formula: "E = h\\nu" },
-    { label: "Some energy is used to 'break free' (Work Function).", formula: "\\Phi" },
-    { label: "The rest becomes 'Speed' (Kinetic Energy).", formula: "\\frac{1}{2}mv^2" },
-    { label: "Total Equation:", formula: "h\\nu = \\Phi + \\frac{1}{2}mv^2" },
+    { label: "One Photon (hν) strikes the surface.", formula: "E = h\\nu" },
+    { label: "Energy is used to overcome the Work Function.", formula: "\\Phi" },
+    { label: "The remaining energy becomes Kinetic Energy (Speed).", formula: "\\frac{1}{2}mv^2" },
+    { label: "Total Energy Equation:", formula: "h\\nu = \\Phi + \\frac{1}{2}mv^2" },
   ];
 
   return (
-    <SlideLayout title="Einstein’s Formula" subtitle="Very Simple Energy Math">
+    <SlideLayout title="Einstein’s Formula" subtitle="Albert Einstein (1879–1955) | Modern Explanation (1905)">
       <div className="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
         <div className="space-y-2 md:space-y-4">
           {steps.map((s, i) => (
@@ -441,7 +670,7 @@ export const Slide5_EinsteinEquation = () => {
               key={i}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.3 }}
+              transition={{ delay: i * 0.3, type: "spring", damping: 15 }}
               className="p-6 bg-physics-surface border border-physics-border rounded-2xl shadow-physics"
             >
               <div className="text-physics-accent font-bold text-xs uppercase mb-1">Part {i + 1}</div>
@@ -451,10 +680,25 @@ export const Slide5_EinsteinEquation = () => {
           ))}
         </div>
 
-        <div className="bg-physics-accent/5 p-12 rounded-[50px] border-4 border-dashed border-physics-accent/20 text-center">
-          <p className="text-physics-text-dim uppercase text-xs font-mono mb-4">Final Highlighted Form</p>
-          <div className="text-4xl font-bold p-8 bg-black/80 dark:bg-black rounded-3xl shadow-[0_0_30px_rgba(0,212,255,0.15)]">
-            <Latex formula="\frac{1}{2}mv^2 = h(\nu - \nu_0)" block />
+        <div className="flex flex-col gap-8">
+          <div className="flex justify-end pr-8">
+            <div className="flex items-center gap-6 bg-physics-surface/50 p-6 rounded-[30px] border border-physics-border shadow-physics">
+              <div className="w-32 h-32 rounded-2xl border-2 border-physics-accent/30 overflow-hidden shadow-2xl">
+                <img src="/albert_einstein.png" alt="Albert Einstein" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+              </div>
+              <div>
+                <h4 className="text-physics-accent font-bold uppercase text-[10px] tracking-widest">Scientific Icon</h4>
+                <p className="text-physics-text font-black text-xl italic leading-none">Albert Einstein</p>
+                <p className="text-[10px] text-physics-text-dim mt-2 font-mono uppercase">Nobel Prize for this explanation</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-physics-accent/5 p-12 rounded-[50px] border-4 border-dashed border-physics-accent/20 text-center">
+            <p className="text-physics-text-dim uppercase text-xs font-mono mb-4">Final Highlighted Form</p>
+            <div className="text-4xl font-bold p-8 bg-black/80 dark:bg-black rounded-3xl shadow-[0_0_30px_rgba(0,212,255,0.15)]">
+              <Latex formula="\frac{1}{2}mv^2 = h(\nu - \nu_0)" block />
+            </div>
           </div>
         </div>
       </div>
@@ -463,7 +707,7 @@ export const Slide5_EinsteinEquation = () => {
 };
 
 export const Slide6_Cell = () => (
-  <SlideLayout title="Photoelectric Cell" subtitle="Application Archetypes">
+  <SlideLayout title="Photo-electric Cell" subtitle="Three Popular Types">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-4 md:mt-12 h-full">
       {[
         { icon: Radio, title: "Photo-emission", desc: "Vacuum tube where light causes surface emission of electrons from cathode." },
